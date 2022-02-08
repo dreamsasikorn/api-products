@@ -23,7 +23,7 @@ class CategoryController extends Controller
         } else {
             return response()->json([
                 'success' => false,
-                'msg' => 'something went wrong,Maybe dont have data',
+                'msg' => 'dont have data',
                 'data' => $list_categories
             ]);
             // echo 'Uhhh dont have data';

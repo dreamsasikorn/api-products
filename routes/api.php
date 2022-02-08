@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Models\Category;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,9 @@ Route::prefix('categories')->group(function () {
     Route::post('add_category', [CategoryController::class, 'store'])->name('add_category');
     Route::put('edit_category/{id}', [CategoryController::class, 'update'])->name('edit_category');
     Route::delete('{id}', [CategoryController::class, 'destroy'])->name('destroy_category');
-    // Route::get('/json-data', function () {
-    //     return Category::paginate();
-    // });
+});
+
+Route::prefix('products')->group(function () {
+    Route::get('list_products', [ProductController::class, 'list_products'])->name('list_products');
+    Route::post('add_product', [ProductController::class, 'store'])->name('add_products');
 });
