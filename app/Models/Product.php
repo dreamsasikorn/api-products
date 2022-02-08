@@ -10,7 +10,7 @@ class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
-
+    protected $fillable = ['image_path'];
     public function category()
     {
         return $this->belongsTo('App\Models\Category');
