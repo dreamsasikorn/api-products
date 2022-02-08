@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use Illuminate\Http\File;
 
 class ProductController extends Controller
 {
@@ -37,8 +38,12 @@ class ProductController extends Controller
             $new_product->status = 0;
             $new_product->category_id = $request->category_id;
             if ($image_path = $request->file('image_path')) {
-                $filename = Carbon::now()->format('Y-m-d') . '.' . $image_path->getClientOriginalExtension();
-                $new_product->image_path = $filename;
+                // $filename = Carbon::now()->format('Y-m-d') . '.' . $image_path->getClientOriginalExtension();
+                // $path = Storage::put('/storage', $url);
+                $image = $image_path->store('public/products/' . Carbon::now()->format('Y-m-d'));
+                $url = Storage::url($image);
+                //Save url to image
+                $new_product->image_path = $url;
             }
             $new_product->save();
             return response()->json([
