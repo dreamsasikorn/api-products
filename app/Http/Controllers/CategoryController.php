@@ -83,4 +83,21 @@ class CategoryController extends Controller
             ]);
         }
     }
+
+    public function destroy(Request $request)
+    {
+        $id = Category::where('id', $request->id)->first();
+        if ($id) {
+            $id->delete();
+            return response()->json([
+                'success' => true,
+                'msg' => 'delete category successfully'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'cannot find id'
+            ]);
+        }
+    }
 }

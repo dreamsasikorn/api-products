@@ -20,9 +20,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('list_categories', [CategoryController::class, 'list_categories'])->name('list_categories');
-Route::post('add_category', [CategoryController::class, 'store'])->name('add_category');
-Route::put('edit_category/{id}', [CategoryController::class, 'update'])->name('edit_category');
-// Route::get('/json-data', function () {
-//     return Category::paginate();
-// });
+Route::prefix('categories')->group(function () {
+    Route::get('list_categories', [CategoryController::class, 'list_categories'])->name('list_categories');
+    Route::post('add_category', [CategoryController::class, 'store'])->name('add_category');
+    Route::put('edit_category/{id}', [CategoryController::class, 'update'])->name('edit_category');
+    Route::delete('{id}', [CategoryController::class, 'destroy'])->name('destroy_category');
+    // Route::get('/json-data', function () {
+    //     return Category::paginate();
+    // });
+});
