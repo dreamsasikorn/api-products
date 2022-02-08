@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('list_categories', [CategoryController::class, 'list_categories'])->name('list_categories');
+Route::post('add_category', [CategoryController::class, 'store'])->name('add_category');
+Route::put('edit_category/{id}', [CategoryController::class, 'update'])->name('edit_category');
+// Route::get('/json-data', function () {
+//     return Category::paginate();
+// });
