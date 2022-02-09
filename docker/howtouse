@@ -1,0 +1,27 @@
+1.clone project api-products ลงมา
+2. cmd เข้าไปที่ api-products แล้วพิมพ์คำสั่ง cp .env.example .env
+3.ไปที่ database.php แล้วตั้งค่า database_path ใน  sqlite เป็น database.sqlite
+4.ใน  .env ให้
+DB_CONNECTION=sqlite
+# DB_HOST=127.0.0.1
+# DB_PORT=3306
+# DB_DATABASE=laravel
+# DB_USERNAME=root
+# DB_PASSWORD= 
+
+5.composer install ใน api-products
+6.generate key ใน .env ด้วยคำสั่ง php artisan key:generate
+
+ติดตั้ง docker ตาม https://phoenixnap.com/kb/install-docker-on-ubuntu-20-04 หรือ https://docs.docker.com/desktop/windows/install/
+จากนั้นเอาไฟล์ docker-compose.yaml ไปใส่ในโฟลเดอร์ container ที่สร้าง แล้วรันด้วยคำสั่ง docker-compose up -d  
+api มี path 8  path
+-api/categories/list_categories method:get
+-api/categories/add_category method:post
+-api/categories/edit_category/{id} method:put
+-api/categories/{id} method:delete
+
+-api/products/list_products method:get
+-api/products/add_product method:post
+-api/products/edit_product/{id} method:post
+-api/products/{id} method:delete
+
