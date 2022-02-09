@@ -21,7 +21,7 @@ class ListProductResource extends JsonResource
             'image_path' => $this->image_path,
             'amount' => $this->amount,
             'status' => $this->status,
-            'category' => [
+            'category' => $this->category == null ? null : [
                 'category_id' => $this->category->id,
                 'category_name' => $this->category->name
             ]
