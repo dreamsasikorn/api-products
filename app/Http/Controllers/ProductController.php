@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use Illuminate\Http\File;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
@@ -41,8 +42,8 @@ class ProductController extends Controller
             $new_product->category_id = $request->category_id;
             if ($image_path = $request->file('image_path')) {
                 $image = $image_path->store('public/products/' . Carbon::now()->format('Y-m-d'));
-                $url = Storage::url($image);
-                $new_product->image_path = $url;
+                // $url = Storage::url($image);
+                $new_product->image_path = $image;
             }
             $new_product->save();
             return response()->json([
@@ -61,34 +62,55 @@ class ProductController extends Controller
 
     public function update(Request $request)
     {
-        // $product_id = $request->id;
-        // if ($product_id) {
-        $product = Product::where('id', $request->id)->first();
-        $product->name = $request->name == null ? $product->name : $request->name;
-        $product->amount = $request->amount == null ? $product->amount : $request->amount;
-        $product->status = $request->status == null ? $product->status : $request->status;
-        $product->category_id = $request->category_id == null ? $product->category_id : $request->category_id;
-        // $product->image_path = $request->image_path == null ? $product->image_path : $request->image_path;
-        dd($request->file('image_path'));
-        if ($image_path = $request->file('image_path')) {
-            $image = $image_path->store('public/products/' . Carbon::now()->format('Y-m-d'));
-            $url = Storage::url($image);
-            dd($url);
-            // $festival->logo_path = $url_image_logo;
-        }
-        // return $product;
+        try {
+            $product = Product::where('id', $request->id)->first();
+            $product->name = $request->name == null ? $product->name : $request->name;
+            $product->amount = $request->amount == null ? $product->amount : $request->amount;
+            $product->status = $request->status == null ? $product->status : $request->status;
+            $product->category_id = $request->category_id == null ? $product->category_id : $request->category_id;
+            // $product->image_path = $request->image_path == null ? $product->image_path : $request->image_path;
+            if ($image_path = $request->file('image_path')) {
+                $image = $image_path->store('public/products/' . Carbon::now()->format('Y-m-d'));
+                // $url = Storage::url($image);
+                $product->image_path = $image;
+            }
+            // return $product;
 
-        // $product->update();
-        if ($product) {
-            return response()->json([
-                'success' => true,
-                'msg' => 'Update Product Successfully'
-            ]);
-        } else {
+            $product->update();
+            if ($product) {
+                return response()->json([
+                    'success' => true,
+                    'msg' => 'Update Product Successfully'
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'msg' => 'Cannot Update Product'
+                ]);
+            }
+        } catch (Throwable $ex) {
             return response()->json([
                 'success' => false,
-                'msg' => 'Cannot Update Product'
+                'msg' => 'Error data'
             ]);
+        }
+    }
+
+    public function destroy(Request $request)
+    {
+        $product = Product::where('id', $request->id)->first();
+        $path = explode('/', $product->image_path);
+        // return storage_path($product->image_path);
+        if ($product) {
+            Storage::delete($product->image_path);
+            // return $product->image_path;
+            $product->delete();
+            return response()->json([
+                'success' => true,
+                'msg' => 'ลบข้อมูลเรียบร้อยแล้ว'
+            ]);
+        } else {
+            return response()->json(['success' => false, 'msg' => 'ข้อมูลไม่มีอยู่ในระบบหรืออาจถูกย้ายไปแล้ว']);
         }
     }
 }
