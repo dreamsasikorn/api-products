@@ -1,0 +1,293 @@
+{
+	"info": {
+		"_postman_id": "08b823cc-a60b-4742-afb8-5c388994c213",
+		"name": "products_system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "edit_product",
+			"protocolProfileBehavior": {
+				"followOriginalHttpMethod": false,
+				"followAuthorizationHeader": false
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image_path",
+							"type": "file",
+							"src": "/home/sasikorn/Desktop/image/image_test/report.png"
+						},
+						{
+							"key": "status",
+							"value": "1",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8302/api/products/edit_product/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8302",
+					"path": [
+						"api",
+						"products",
+						"edit_product",
+						"2"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "กระเป๋าสะพายข้าง",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit_category",
+			"protocolProfileBehavior": {
+				"followOriginalHttpMethod": false,
+				"followAuthorizationHeader": false
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"กระโปรง\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8302/api/categories/edit_category/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8302",
+					"path": [
+						"api",
+						"categories",
+						"edit_category",
+						"1"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "กระเป๋าสะพายข้าง",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list_categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8302/api/categories/list_categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8302",
+					"path": [
+						"api",
+						"categories",
+						"list_categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list_products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8302/api/products/list_products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8302",
+					"path": [
+						"api",
+						"products",
+						"list_products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "destroy_category",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8302/api/categories/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8302",
+					"path": [
+						"api",
+						"categories",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "destroy_product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8302/api/products/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8302",
+					"path": [
+						"api",
+						"products",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add_product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "กระเป๋า",
+							"type": "text"
+						},
+						{
+							"key": "image_path",
+							"type": "file",
+							"src": "/home/sasikorn/Desktop/1200_0_600x.jpg"
+						},
+						{
+							"key": "amount",
+							"value": "3500",
+							"type": "text"
+						},
+						{
+							"key": "category_id",
+							"value": "3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8302/api/products/add_product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8302",
+					"path": [
+						"api",
+						"products",
+						"add_product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add_category",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"กระเป๋า\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8302/api/categories/add_category",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8302",
+					"path": [
+						"api",
+						"categories",
+						"add_category"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.collectionVariables.set(\"variable_key\", \"variable_value\");",
+					"pm.sendRequest(\"https://postman-echo.com/get\", function (err, response) {",
+					"    console.log(response.json());",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "localhost:3000"
+		}
+	]
+}

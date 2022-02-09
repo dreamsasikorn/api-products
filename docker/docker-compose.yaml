@@ -1,0 +1,32 @@
+version: "3.7"
+networks:
+  website:
+    name: website
+    driver: bridge
+services:
+  mariadb:
+    container_name: mariadb
+    image: mariadb:10.2-bionic
+    tty: true
+    ports:
+      - 3306:3306
+    volumes:
+      - ./database/mariadb/data:/var/lib/mysql
+    networks:
+      - website
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+    
+  api-products:
+    container_name: api-products
+    image: webdevops/php-nginx:7.4
+    ports:
+      - 8302:80
+    volumes:
+      - ./api-products:/app
+    networks:
+      - website
+    environment:
+      WEB_DOCUMENT_ROOT: /app/public
+
+  
