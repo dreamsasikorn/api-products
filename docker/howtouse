@@ -11,6 +11,8 @@ DB_CONNECTION=sqlite
 
 5.composer install ใน api-products
 6.generate key ใน .env ด้วยคำสั่ง php artisan key:generate
+7.php artisan storage:link
+8.php artisan migrate table to db
 
 ติดตั้ง docker ตาม https://phoenixnap.com/kb/install-docker-on-ubuntu-20-04 หรือ https://docs.docker.com/desktop/windows/install/
 จากนั้นเอาไฟล์ docker-compose.yaml ไปใส่ในโฟลเดอร์ container ที่สร้าง แล้วรันด้วยคำสั่ง docker-compose up -d  
