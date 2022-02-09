@@ -34,6 +34,6 @@ Route::prefix('categories')->group(function () {
 Route::prefix('products')->group(function () {
     Route::get('list_products', [ProductController::class, 'list_products'])->name('list_products');
     Route::post('add_product', [ProductController::class, 'store'])->name('add_products');
-    Route::put('edit_product/{id}', [ProductController::class, 'update'])->name('edit_product');
+    Route::post('edit_product/{id}', [ProductController::class, 'update'])->name('edit_product');
     Route::delete('{id}', [ProductController::class, 'destroy'])->name('destroy_product');
 });
