@@ -24,7 +24,7 @@ class ProductController extends Controller
         } else {
             return response()->json([
                 'success' => false,
-                'msg' => 'dont have data',
+                'msg' => "Don't have data in Product",
                 'data' => $list_products
             ]);
         }
@@ -84,13 +84,13 @@ class ProductController extends Controller
             } else {
                 return response()->json([
                     'success' => false,
-                    'msg' => 'Cannot Update Product'
+                    'msg' => 'Cannot Update Product Maybe some data is invalid or incorrect'
                 ]);
             }
         } catch (Throwable $ex) {
             return response()->json([
                 'success' => false,
-                'msg' => 'Error data'
+                'msg' => 'Some Error data'
             ]);
         }
     }
@@ -98,7 +98,7 @@ class ProductController extends Controller
     public function destroy(Request $request)
     {
         $product = Product::where('id', $request->id)->first();
-        $path = explode('/', $product->image_path);
+        //$path = explode('/', $product->image_path);
         // return storage_path($product->image_path);
         if ($product) {
             Storage::delete($product->image_path);
@@ -109,7 +109,10 @@ class ProductController extends Controller
                 'msg' => 'ลบข้อมูลเรียบร้อยแล้ว'
             ]);
         } else {
-            return response()->json(['success' => false, 'msg' => 'ข้อมูลไม่มีอยู่ในระบบหรืออาจถูกย้ายไปแล้ว']);
+            return response()->json([
+                'success' => false,
+                'msg' => 'ข้อมูลไม่มีอยู่ในระบบหรืออาจถูกย้ายไปแล้ว'
+            ]);
         }
     }
 }
