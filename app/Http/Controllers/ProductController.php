@@ -19,12 +19,12 @@ class ProductController extends Controller
         if (count($list_products) > 0) {
             return [
                 'data' => ListProductResource::collection($list_products),
-                'page' => Product::paginate(10)
+                'page' => Product::paginate(24)
             ];
         } else {
             return response()->json([
                 'success' => false,
-                'msg' => "Don't have data in Product",
+                'msg' => "Not found data about product",
                 'data' => $list_products
             ]);
         }
@@ -40,20 +40,19 @@ class ProductController extends Controller
             $new_product->status = 0;
             $new_product->category_id = $request->category_id;
             if ($image_path = $request->file('image_path')) {
-                $image = $image_path->store('public/products/' . Carbon::now()->format('Y-m-d'));
-                // $url = Storage::url($image);
+                $image = $image_path->store('public/attachments/'.Carbon::now()->format('Y').'/products/' . Carbon::now()->format('Y-m-d'));
                 $new_product->image_path = $image;
             }
             $new_product->save();
             return response()->json([
                 'success' => true,
-                'msg' => 'Create Product Successfully'
+                'msg' => 'Store Product Successfully'
             ]);
         } catch (Throwable $ex) {
             Log::error($ex);
             return response()->json([
                 'success' => false,
-                'msg' => 'Cannot Create Product',
+                'msg' => 'Cannot Store Product',
                 'data' => $new_product
             ]);
         }
@@ -67,7 +66,6 @@ class ProductController extends Controller
             $product->amount = $request->amount == null ? $product->amount : $request->amount;
             $product->status = $request->status == null ? $product->status : $request->status;
             $product->category_id = $request->category_id == null ? $product->category_id : $request->category_id;
-            // $product->image_path = $request->image_path == null ? $product->image_path : $request->image_path;
             if ($image_path = $request->file('image_path')) {
                 $image = $image_path->store('public/products/' . Carbon::now()->format('Y-m-d'));
                 // $url = Storage::url($image);
@@ -90,7 +88,7 @@ class ProductController extends Controller
         } catch (Throwable $ex) {
             return response()->json([
                 'success' => false,
-                'msg' => 'Some Error data'
+                'msg' => 'Some Error,Not found data'
             ]);
         }
     }
@@ -106,12 +104,12 @@ class ProductController extends Controller
             $product->delete();
             return response()->json([
                 'success' => true,
-                'msg' => 'ลบข้อมูลเรียบร้อยแล้ว'
+                'msg' => 'Delete data successfully'
             ]);
         } else {
             return response()->json([
                 'success' => false,
-                'msg' => 'ข้อมูลไม่มีอยู่ในระบบหรืออาจถูกย้ายไปแล้ว'
+                'msg' => 'Cannot delete data(Not found data or data is wrong)'
             ]);
         }
     }
