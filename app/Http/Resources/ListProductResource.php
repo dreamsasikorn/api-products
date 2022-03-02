@@ -17,7 +17,7 @@ class ListProductResource extends JsonResource
         // return parent::toArray($request);
         return [
             'id' => $this->id,
-            'name' => $this->name,
+            'product_name' => $this->name,
             'image_path' => $this->image_path,
             'amount' => $this->amount,
             'status' => $this->status,
