@@ -16,11 +16,11 @@ class ListProductResource extends JsonResource
     {
         // return parent::toArray($request);
         return [
-            'id' => $this->id,
+            'product_id' => $this->id,
             'product_name' => $this->name,
-            'image_path' => $this->image_path,
-            'amount' => $this->amount,
-            'status' => $this->status,
+            'product_image_path' => $this->image_path,
+            'product_amount' => $this->amount,
+            'product_status' => $this->status,
             'category' => $this->category == null ? null : [
                 'category_id' => $this->category->id,
                 'category_name' => $this->category->name
